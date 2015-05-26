@@ -1,0 +1,29 @@
+#!/bin/bash -e
+
+if [ ! -f /etherpad/SESSIONKEY.txt ]; then
+  pwgen -s 40 -1 > /etherpad/SESSIONKEY.txt
+fi
+
+if [ ! -f /etherpad/APIKEY.txt ]; then
+  pwgen -s 40 -1 > /etherpad/APIKEY.txt
+fi
+
+if [ -f /etc/etherpad.json ]; then
+  cp /etc/etherpad.json /etherpad/settings.json
+
+  # Replace __DB_HOST__ with linked database.
+  sed -i "s/__DB_HOST__/${DB_PORT_5432_TCP_ADDR}:${DB_PORT_5432_TCP_PORT}/g" /etherpad/settings.json
+fi
+
+chown -Rh etherpad:etherpad /etherpad/var
+
+# This files are created the first time Etherpad is run. It does not run if they do not
+# exist or if it cannot create them. It is unclear why they are needed.
+# See https://github.com/ether/etherpad-lite/issues/2683
+for MODULE in /etherpad/node_modules/*; do
+  touch "${MODULE}/.ep_initialized"
+  chown etherpad:etherpad "${MODULE}/.ep_initialized"
+done
+
+cd /etherpad
+exec chpst -u etherpad:etherpad /usr/bin/node /etherpad/node_modules/ep_etherpad-lite/node/server.js 2>&1
