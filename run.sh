@@ -1,7 +1,10 @@
 #!/bin/bash -e
 
 # An example script to run Etherpad in production. It uses data volumes under the $DATA_ROOT directory.
-# By default /srv.
+# By default /srv. It uses a PostgreSQL database. The first time you have to create a database itself
+# and account with permissions over it. In Etherpad settings you can use __DB_HOST__ placeholder which
+# will be replaced with host and port of a linked PostgreSQL container. The first time you run this
+# script it will create a default settings.json file on the host for you at $ETHERPAD_SETTINGS.
 
 SCRIPT_DIR="$( dirname "${BASH_SOURCE[0]}" )"
 
@@ -21,50 +24,23 @@ if [ -f "${SCRIPT_DIR}/etherpad-lite/settings.json.template" ] && [ ! -f "$ETHER
   cp "${SCRIPT_DIR}/etherpad-lite/settings.json.template" "$ETHERPAD_SETTINGS"
 fi
 
-function container_running() {
-  local name="$1"
+docker stop "${NAME}_postgresql" || true
+sleep 1
+docker rm "${NAME}_postgresql" || true
+sleep 1
+docker run --detach=true --restart=always --name "${NAME}_postgresql" --volume "${POSTGRESQL_LOG}:/var/log/postgresql" --volume "${POSTGRESQL_DATA}:/var/lib/postgresql" tozd/postgresql
 
-  local running=$(docker inspect --format="{{ .State.Running }}" "$name" 2> /dev/null)
-  if [ $? -eq 1 ]; then
-    # Container does not exist.
-    return 2
-  fi
-  if [ "$running" == "true" ]; then
-    # Container is running.
-    return 0
-  fi
-  # Container is not running.
-  return 1
-}
+# If you are running the PostgreSQL image for the first time with its data volume, you should configure the
+# database. Exec into the Docker container and run the following example commands to create user "etherpad"
+# with database "etherpad":
+#
+# docker exec -t -i <NAME>_postgresql /bin/bash
+#
+# createuser -U postgres -DRS -P etherpad
+# createdb -U postgres -O etherpad etherpad
 
-function container_stopped() {
-  local name="$1"
-
-  local running=$(docker inspect --format="{{ .State.Running }}" "$name" 2> /dev/null)
-  if [ $? -eq 1 ]; then
-    # Container does not exist.
-    return 2
-  fi
-  if [ "$running" == "false" ]; then
-    # Container is not running.
-    return 0
-  fi
-  # Container is running.
-  return 1
-}
-
-function run_or_start() {
-  local name="$1"
-  shift
-  
-  if container_stopped "$name"; then
-    echo "Starting '$name'"
-    docker start "$name"
-  elif ! container_running "$name"; then
-    echo "Running '$name'"
-    docker run --detach=true --restart=always --name "$name" "$@"
-  else
-    echo "Already running '$name'"
-    return 0
-  fi
-}
+docker stop "${NAME}_etherpad" || true
+sleep 1
+docker rm "${NAME}_etherpad" || true
+sleep 1
+docker run --detach=true --restart=always --name "${NAME}_etherpad" --env VIRTUAL_HOST="${NAME}.tnode.com" --env VIRTUAL_URL=/ --volume "${ETHERPAD_LOG}:/var/log/etherpad" --volume "${ETHERPAD_SETTINGS}:/etc/etherpad.json" --link "${NAME}_postgresql:db" tozd/etherpad
