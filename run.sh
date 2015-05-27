@@ -32,9 +32,9 @@ docker run --detach=true --restart=always --name "${NAME}_postgresql" --volume "
 
 # If you are running the PostgreSQL image for the first time with its data volume, you should configure the
 # database. Exec into the Docker container and run the following example commands to create user "etherpad"
-# with database "etherpad":
+# with database "etherpad", by default:
 #
-# docker exec -t -i <NAME>_postgresql /bin/bash
+# docker exec -t -i etherpad_postgresql /bin/bash
 #
 # createuser -U postgres -DRS -P etherpad
 # createdb -U postgres -O etherpad etherpad
