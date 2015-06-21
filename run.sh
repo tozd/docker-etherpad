@@ -8,13 +8,13 @@
 
 SCRIPT_DIR="$( dirname "${BASH_SOURCE[0]}" )"
 
-export NAME='etherpad'
-export DATA_ROOT='/srv'
-export POSTGRESQL_DATA="${DATA_ROOT}/${NAME}/postgresql/data"
-export POSTGRESQL_LOG="${DATA_ROOT}/${NAME}/postgresql/log"
+NAME='etherpad'
+DATA_ROOT='/srv'
+POSTGRESQL_DATA="${DATA_ROOT}/${NAME}/postgresql/data"
+POSTGRESQL_LOG="${DATA_ROOT}/${NAME}/postgresql/log"
 
-export ETHERPAD_LOG="${DATA_ROOT}/${NAME}/etherpad/log"
-export ETHERPAD_SETTINGS="${DATA_ROOT}/${NAME}/settings.json"
+ETHERPAD_LOG="${DATA_ROOT}/${NAME}/etherpad/log"
+ETHERPAD_SETTINGS="${DATA_ROOT}/${NAME}/settings.json"
 
 mkdir -p "$POSTGRESQL_DATA"
 mkdir -p "$POSTGRESQL_LOG"
