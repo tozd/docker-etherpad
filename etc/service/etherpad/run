@@ -11,8 +11,9 @@ fi
 if [ -f /etc/etherpad.json ]; then
   cp /etc/etherpad.json /etherpad/settings.json
 
-  # Replace __DB_HOST__ with linked database.
-  sed -i "s/__DB_HOST__/${DB_PORT_5432_TCP_ADDR}:${DB_PORT_5432_TCP_PORT}/g" /etherpad/settings.json
+  # Replace __DB_HOST__ and __DB_PORT__ with linked database.
+  sed -i "s/__DB_HOST__/${DB_PORT_5432_TCP_ADDR}/g" /etherpad/settings.json
+  sed -i "s/__DB_PORT__/${DB_PORT_5432_TCP_PORT}/g" /etherpad/settings.json
 fi
 
 chown -Rh etherpad:etherpad /etherpad/var
