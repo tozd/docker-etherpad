@@ -2,14 +2,13 @@ FROM registry.gitlab.com/tozd/docker/runit:ubuntu-focal
 
 EXPOSE 9001/tcp
 
-RUN apt-get update -q -q && \
- apt-get install --yes --force-yes nodejs npm adduser git gzip curl python pkg-config build-essential tidy abiword pwgen && \
- adduser --system --group etherpad --home /home/etherpad
-
 COPY ./etherpad-lite /etherpad
 COPY ./plugins /etherpad-plugins
 
-RUN cd /etherpad && \
+RUN apt-get update -q -q && \
+ apt-get install --yes --force-yes nodejs npm adduser tidy abiword git curl python pkg-config build-essential pwgen && \
+ adduser --system --group etherpad --home /home/etherpad && \
+ cd /etherpad && \
  npm install /etherpad-plugins/* && \
  ./bin/installDeps.sh && \
  for PLUGIN in /etherpad-plugins/*; do \
@@ -17,6 +16,8 @@ RUN cd /etherpad && \
  done && \
  for MODULE in /etherpad/node_modules/*; do \
    chmod o+tw "${MODULE}"; \
- done
+ done && \
+ apt-get purge --yes --force-yes --auto-remove git curl python pkg-config build-essential && \
+ apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache ~/.npm
 
 COPY ./etc /etc
