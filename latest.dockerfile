@@ -1,4 +1,4 @@
-FROM tozd/runit
+FROM registry.gitlab.com/tozd/docker/runit:ubuntu-trusty
 
 EXPOSE 9001/tcp
 
