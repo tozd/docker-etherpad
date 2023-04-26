@@ -24,4 +24,4 @@ Available as:
 You can mount Etherpad's `settings.json` file into `/etherpad/settings.json` inside the container.
 
 Alternatively, you can set environment variables which will then Etherpad substitute in settings template
-at the first run. See [the template](./etherpad-lite/settings.json.template) and available environment variables.
+at the first run. See [the template](https://github.com/tozd/etherpad-lite/blob/develop/settings.json.template) and available environment variables.
