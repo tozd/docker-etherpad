@@ -7,7 +7,7 @@ echo "Sleeping"
 sleep 10
 
 echo "Testing"
-curl -s http://docker:9001 | grep -q '<title>Etherpad</title>'
+wget -q -O - http://docker:9001 | grep -q '<title>Etherpad</title>'
 result=$?
 
 echo "Stopping Docker image"
