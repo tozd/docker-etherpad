@@ -15,6 +15,10 @@ Available as:
 
 - `latest`: Etherpad Lite 1.7.5 with [ep_tables2](https://github.com/seballot/ep_tables2) plugin
 
+## Volumes
+
+- `/var/log/etherpad`: log files
+
 ## Ports
 
 - `9001/tcp`: HTTP port on which Etherpad listens.

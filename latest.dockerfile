@@ -1,5 +1,7 @@
 FROM registry.gitlab.com/tozd/docker/runit:ubuntu-jammy
 
+VOLUME /var/log/etherpad
+
 EXPOSE 9001/tcp
 
 COPY ./etherpad-lite /etherpad
