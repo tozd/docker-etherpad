@@ -4,8 +4,20 @@
 
 Available as:
 
-* [`tozd/etherpad`](https://hub.docker.com/r/tozd/etherpad)
-* [`registry.gitlab.com/tozd/docker/etherpad`](https://gitlab.com/tozd/docker/etherpad/container_registry)
+- [`tozd/etherpad`](https://hub.docker.com/r/tozd/etherpad)
+- [`registry.gitlab.com/tozd/docker/etherpad`](https://gitlab.com/tozd/docker/etherpad/container_registry)
+
+## Image inheritance
+
+[`tozd/base`](https://gitlab.com/tozd/docker/base) ← [`tozd/runit`](https://gitlab.com/tozd/docker/runit) ← `tozd/etherpad`
+
+## Tags
+
+- `latest`: Etherpad Lite 1.7.5 with [ep_tables2](https://github.com/seballot/ep_tables2) plugin
+
+## Ports
+
+- `9001/tcp`: HTTP port on which Etherpad listens.
 
 ## Description
 
