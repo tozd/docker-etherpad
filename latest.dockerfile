@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/tozd/docker/runit:ubuntu-focal
+FROM registry.gitlab.com/tozd/docker/runit:ubuntu-jammy
 
 EXPOSE 9001/tcp
 
