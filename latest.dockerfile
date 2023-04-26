@@ -20,4 +20,4 @@ RUN apt-get update -q -q && \
   apt-get purge --yes --force-yes --auto-remove git curl python pkg-config build-essential && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache ~/.npm
 
-COPY ./etc /etc
+COPY ./etc/service/etherpad /etc/service/etherpad
