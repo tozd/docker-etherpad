@@ -11,6 +11,6 @@ wget -q -O - http://docker:9001 | grep -q '<title>Etherpad</title>'
 result=$?
 
 echo "Stopping Docker image"
-docker stop test
+docker stop test || exit 2
 
 exit "$result"
