@@ -17,7 +17,7 @@ Available as:
 
 ## Volumes
 
-- `/var/log/etherpad`: log files
+- `/var/log/etherpad`: Log files.
 
 ## Ports
 
