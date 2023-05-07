@@ -29,3 +29,8 @@ You can mount Etherpad's `settings.json` file into `/etherpad/settings.json` ins
 
 Alternatively, you can set environment variables which will then Etherpad substitute in settings template
 at the first run. See [the template](https://github.com/tozd/etherpad-lite/blob/develop/settings.json.template) and available environment variables.
+
+## GitHub mirror
+
+There is also a [read-only GitHub mirror available](https://github.com/tozd/docker-etherpad),
+if you need to fork the project there.
