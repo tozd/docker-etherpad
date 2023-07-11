@@ -22,3 +22,4 @@ sleep 10
 
 echo "Testing"
 wget -q -O - http://docker:9001 | grep -q '<title>Etherpad</title>'
+echo "Success"
