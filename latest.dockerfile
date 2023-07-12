@@ -11,9 +11,6 @@ RUN apt-get update -q -q && \
   adduser --system --group etherpad --home /home/etherpad && \
   cd /etherpad && \
   ./bin/installDeps.sh && \
-  for MODULE in /etherpad/node_modules/*; do \
-  chmod o+tw "${MODULE}"; \
-  done && \
   apt-get purge --yes --force-yes --auto-remove git curl python3 pkg-config build-essential && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache ~/.npm
 
