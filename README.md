@@ -17,7 +17,11 @@ Available as:
 
 ## Volumes
 
-- `/var/log/etherpad`: Log files.
+- `/var/log/etherpad`: Log files when `LOG_TO_STDOUT` is not set to `1`.
+
+## Variables
+
+- `LOG_TO_STDOUT`: If set to `1` output logs to stdout (retrievable using `docker logs`) instead of log volumes.
 
 ## Ports
 

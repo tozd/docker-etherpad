@@ -1,6 +1,10 @@
 #!/bin/bash -e
 
-mkdir -p /var/log/etherpad
-chown nobody:nogroup /var/log/etherpad
+if [ "${LOG_TO_STDOUT}" != "1" ]; then
+  mkdir -p /var/log/etherpad
+  chown nobody:nogroup /var/log/etherpad
 
-exec chpst -u nobody:nogroup svlogd -tt /var/log/etherpad
+  exec chpst -u nobody:nogroup svlogd -tt /var/log/etherpad
+else
+  exec chpst -u nobody:nogroup regex2json "^\\s*(?:(?:\\x{001b}\\[\\d+m)?\\[(?P<time___time__DateTimeMilli___optional>\\d+-\\d+-\\d+ \\d+:\\d+:\\d+\\.\\d+)\\] \\[(?P<level___optional>\\S+)\\] (?P<logger___optional>\\S+) - (?:\\x{001b}\\[\\d+m)?)?(?P<msg>.+?)\\s*$"
+fi

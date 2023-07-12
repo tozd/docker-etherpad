@@ -4,6 +4,8 @@ VOLUME /var/log/etherpad
 
 EXPOSE 9001/tcp
 
+ENV LOG_TO_STDOUT=0
+
 COPY ./etherpad-lite /etherpad
 
 RUN apt-get update -q -q && \
