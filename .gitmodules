@@ -1,6 +1,3 @@
 [submodule "etherpad-lite"]
 	path = etherpad-lite
 	url = https://github.com/tozd/etherpad-lite
-[submodule "plugins/ep_tables2"]
-	path = plugins/ep_tables2
-	url = https://github.com/tozd/ep_tables2.git

@@ -25,6 +25,8 @@ Available as:
 
 ## Description
 
+Image provides [Etherpad](https://github.com/ether/etherpad-lite).
+
 You can mount Etherpad's `settings.json` file into `/etherpad/settings.json` inside the container.
 
 Alternatively, you can set environment variables which will then Etherpad substitute in settings template
