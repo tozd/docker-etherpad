@@ -13,7 +13,7 @@ Available as:
 
 ## Tags
 
-- `latest`: Etherpad Lite 1.7.5 with [ep_tables2](https://github.com/seballot/ep_tables2) plugin
+- `latest`: Etherpad Lite v1.8.18
 
 ## Volumes
 
