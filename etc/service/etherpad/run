@@ -11,6 +11,7 @@ fi
 chown -Rh etherpad:etherpad /etherpad/var
 
 export NODE_ENV=production
+export HOME=/home/etherpad
 
 cd /etherpad
 exec chpst -u etherpad:etherpad /usr/bin/node /etherpad/node_modules/ep_etherpad-lite/node/server.js 2>&1
