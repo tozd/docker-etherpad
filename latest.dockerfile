@@ -1,4 +1,4 @@
-FROM registry.gitlab.com/tozd/docker/dinit:ubuntu-focal
+FROM registry.gitlab.com/tozd/docker/dinit:ubuntu-jammy
 
 VOLUME /var/log/etherpad
 
