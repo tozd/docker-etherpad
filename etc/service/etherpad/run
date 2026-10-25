@@ -6,7 +6,9 @@ if [ ! -f /etherpad/APIKEY.txt ]; then
   pwgen -s 40 -1 > /etherpad/APIKEY.txt
 fi
 
-chown -Rh etherpad:etherpad /etherpad/var /etherpad/src/plugin_packages
+# Etherpad writes runtime state (e.g., the list of installed plugins) into var/ and fails to start
+# if it cannot. Everything else stays owned by root, so Etherpad cannot install plugins or other code.
+chown -Rh etherpad:etherpad /etherpad/var
 
 export HOME=/home/etherpad
 

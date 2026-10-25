@@ -42,7 +42,6 @@ RUN apt-get update -q -q && \
   rm -f .git && \
   printf 'packages:\n  - src\n  - bin\nallowBuilds:\n  esbuild: true\n  "@scarf/scarf": false\nstrictDepBuilds: false\n' > pnpm-workspace.yaml && \
   ./bin/installDeps.sh && \
-  mkdir -p src/plugin_packages && \
   chmod -R a+rX /etherpad && \
   apt-get purge --yes --force-yes --auto-remove curl gnupg && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache ~/.npm ~/.local/share/pnpm
