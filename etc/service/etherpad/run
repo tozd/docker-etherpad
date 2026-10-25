@@ -2,18 +2,13 @@
 
 trap 'echo "ERROR: $BASH_SOURCE:$LINENO $BASH_COMMAND" >&2' ERR
 
-if [ ! -f /etherpad/SESSIONKEY.txt ]; then
-  pwgen -s 40 -1 > /etherpad/SESSIONKEY.txt
-fi
-
 if [ ! -f /etherpad/APIKEY.txt ]; then
   pwgen -s 40 -1 > /etherpad/APIKEY.txt
 fi
 
-chown -Rh etherpad:etherpad /etherpad/var
+chown -Rh etherpad:etherpad /etherpad/var /etherpad/src/plugin_packages
 
-export NODE_ENV=production
 export HOME=/home/etherpad
 
-cd /etherpad
-exec chpst -u etherpad:etherpad /usr/bin/node /etherpad/src/node/server.js
+cd /etherpad/src
+exec chpst -u etherpad:etherpad /usr/bin/node --require tsx/cjs node/server.ts

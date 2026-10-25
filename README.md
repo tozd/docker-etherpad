@@ -13,7 +13,7 @@ Available as:
 
 ## Tags
 
-- `latest`: Etherpad Lite v1.9.7
+- `latest`: Etherpad v3.3.11
 
 ## Volumes
 
@@ -29,12 +29,12 @@ Available as:
 
 ## Description
 
-Image provides [Etherpad](https://github.com/ether/etherpad-lite).
+Image provides [Etherpad](https://github.com/ether/etherpad).
 
 You can mount Etherpad's `settings.json` file into `/etherpad/settings.json` inside the container.
 
-Alternatively, you can set environment variables which will then Etherpad substitute in settings template
-at the first run. See [the template](https://github.com/tozd/etherpad-lite/blob/develop/settings.json.template) and available environment variables.
+Alternatively, you can set environment variables which Etherpad then substitutes into the settings template
+at the first run. See [the template](https://github.com/ether/etherpad/blob/v3.3.11/settings.json.template) and available environment variables.
 
 When `LOG_TO_STDOUT` is set to `1`, Docker image logs output to stdout and stderr. All stdout output is JSON.
 
