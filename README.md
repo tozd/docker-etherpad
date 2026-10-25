@@ -13,7 +13,7 @@ Available as:
 
 ## Tags
 
-- `latest`: Etherpad Lite v1.8.18
+- `latest`: Etherpad Lite v1.9.7
 
 ## Volumes
 
